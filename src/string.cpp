@@ -90,3 +90,44 @@ String::String(const char *s) {
 }
 
 String::String(const String &s) {
+    strcpy(buf, s.buf);
+}
+
+String::~String() {
+    // cout << "String " << buf << " is destructing" << endl;
+}
+
+int String::size() const {
+    return strlen(buf);
+}
+
+void String::print(ostream &out) const {
+    out << buf;
+}
+
+ostream &operator<<(ostream &out, const String &s) {
+    s.print(out);
+    return out;
+}
+
+void String::read(istream &in) {
+    in >> setw(MAXLEN) >> buf;
+}
+
+istream &operator>>(istream &in, String &s) {
+    s.read(in);
+    return in;
+}
+
+String &String::operator=(const String&s) {
+    strcpy(buf, s.buf);
+    return *this;
+}
+
+char &String::operator[](int index) {
+    if (!in_bounds(index)) {
+        cout << "ERROR: Index out of bounds" << endl;
+        return buf[0];
+    }
+    return buf[index];
+}
