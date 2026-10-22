@@ -131,3 +131,36 @@ char &String::operator[](int index) {
     }
     return buf[index];
 }
+
+String String::reverse() const {
+    String result;
+    reverse_cpy(result.buf, buf);
+    return result;
+}
+
+int String::indexOf(char c) const {
+    const char *p = strchr(buf, c);
+    return p == nullptr ? -1 : p - buf;
+}
+
+int String::indexOf(const String &s) const {
+    const char *p = strstr(buf, s.buf);
+    return p == nullptr ? - 1 : p - buf;
+}
+
+String &String::operator+=(const String &s) {
+    int room = MAXLEN - 1 - size();
+    int n = s.size();
+    if (n > room) {
+        cout << "ERROR: String Capacity Exceeded" << endl;
+        n = room;
+    }
+    strncat(buf, s.buf, n);
+    return *this;
+}
+
+String String::operator+(const String &s) const {
+    String result(*this);
+    result += s;
+    return result;
+}
