@@ -148,6 +148,13 @@ int String::indexOf(const String &s) const {
     return p == nullptr ? - 1 : p - buf;
 }
 
+bool String::operator==(const String &s) const { return strcmp(buf, s.buf) == 0; }
+bool String::operator!=(const String &s) const { return strcmp(buf, s.buf) != 0; }
+bool String::operator>(const String &s) const  { return strcmp(buf, s.buf) > 0; }
+bool String::operator<(const String &s) const  { return strcmp(buf, s.buf) < 0; }
+bool String::operator<=(const String &s) const { return strcmp(buf, s.buf) <= 0; }
+bool String::operator>=(const String &s) const { return strcmp(buf, s.buf) >= 0; }
+
 String &String::operator+=(const String &s) {
     int room = MAXLEN - 1 - size();
     int n = s.size();
